@@ -8,6 +8,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.wennovate.hommy.client.ClientFactory;
+import com.wennovate.hommy.client.owm.ForecastResponse;
 import com.wennovate.hommy.client.owm.WeatherApi;
 import com.wennovate.hommy.client.owm.WeatherResponse;
 import com.wennovate.hommy.client.places.HomePlace;
@@ -33,15 +34,19 @@ public class WeatherActivity extends AbstractActivity implements WeatherView.Pre
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
 		WeatherView weatherView = clientFactory.getWeatherView();
-		weatherView.setName(name);
+		weatherView.setTemperature(name);
 		weatherView.setPresenter(this);
 		containerWidget.setWidget(weatherView.asWidget());
 
-		WeatherResponse res;
 		try {
-			res = WeatherApi.getCurrentWeatherByCity("Milan", "Italy");
-			weatherView.setName("TEMP IS: " + res.getMain().getTemp());
-			logger.info(res.getMain().getTemp());
+			WeatherResponse weatherRes = WeatherApi.getCurrentWeatherByCity("Milan", "Italy");
+
+			ForecastResponse forecastRes = WeatherApi.getForecastByCity("Milan", "Italy");
+			weatherView.setTemperature("TEMP IS: " + weatherRes.getMain().getTemp()+
+					" - TOMORROW MAX: "+forecastRes.getList().get(0).getTemp().getMax() +
+					" - TOMORROW MIN: "+forecastRes.getList().get(0).getTemp().getMin());
+			weatherView.setIcon(weatherRes.getWeather().get(0).getIcon());
+			logger.info(weatherRes.getMain().getTemp());
 		} catch (Exception e) {
 			logger.error(e);
 		}

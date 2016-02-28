@@ -7,8 +7,6 @@ public class Wind extends JavaScriptObject {
 
 	// private float speed;
 	// private float deg;
-	// private Map<String, Object> additionalProperties = new HashMap<String,
-	// Object>();
 
 	protected Wind() {
 	}
@@ -26,9 +24,5 @@ public class Wind extends JavaScriptObject {
 	public final native float getDeg() /*-{
 		return this.deg;
 	}-*/;
-
-	// public final native Map<String, Object> getAdditionalProperties() /*-{
-	// return this.additionalProperties;
-	// }-*/;
 
 }

@@ -12,8 +12,6 @@ public class Main extends JavaScriptObject {
 	// private float tempMax;
 	// private float seaLevel;
 	// private float grndLevel;
-	// private Map<String, Object> additionalProperties = new HashMap<String,
-	// Object>();
 	
 	protected Main() {
 	}
@@ -67,8 +65,5 @@ public class Main extends JavaScriptObject {
 		return this.grndLevel;
 	}-*/;
 
-	// public final native Map<String, Object> getAdditionalProperties() /*-{
-	// return this.this.additionalProperties;
-	// }-*/;
 
 }

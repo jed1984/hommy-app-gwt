@@ -17,8 +17,6 @@ public class WeatherResponse extends JavaScriptObject {
 	// private int id;
 	// private String name;
 	// private int cod;
-	// private Map<String, Object> additionalProperties = new HashMap<String,
-	// Object>();
 	
 	protected WeatherResponse() {
 	}
@@ -100,8 +98,5 @@ public class WeatherResponse extends JavaScriptObject {
 		return this.cod;
 	}-*/;
 
-	// public final native Map<String, Object> getAdditionalProperties() /*-{
-	// return this.additionalProperties;
-	// }-*/;
 
 }

@@ -9,8 +9,6 @@ public class Weather extends JavaScriptObject {
 	// private String main;
 	// private String description;
 	// private String icon;
-	// private Map<String, Object> additionalProperties = new HashMap<String,
-	// Object>();
 
 	protected Weather() {
 	}
@@ -46,8 +44,5 @@ public class Weather extends JavaScriptObject {
 		return this.icon;
 	}-*/;
 
-	// public final native Map<String, Object> getAdditionalProperties() /*-{
-	// return this.additionalProperties;
-	// }-*/
 
 }

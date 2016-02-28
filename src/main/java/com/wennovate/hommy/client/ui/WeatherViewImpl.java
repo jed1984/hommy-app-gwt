@@ -8,6 +8,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 
 public class WeatherViewImpl extends Composite implements WeatherView {
@@ -20,18 +21,27 @@ public class WeatherViewImpl extends Composite implements WeatherView {
 	SpanElement nameSpan;
 	@UiField
 	Anchor goodbyeLink;
+	@UiField
+	Image imageWidget;
 
 	private Presenter presenter;
-	private String name;
+	private String temperature;
+	private String iconId;
 
 	public WeatherViewImpl() {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 
 	@Override
-	public void setName(String name) {
-		this.name = name;
-		nameSpan.setInnerText(name);
+	public void setTemperature(String temperature) {
+		this.temperature = temperature;
+		nameSpan.setInnerText(temperature);
+	}
+
+	@Override
+	public void setIcon(String iconId) {
+		this.iconId = iconId;
+		imageWidget.setUrl("http://openweathermap.org/img/w/" + iconId + ".png");
 	}
 
 	@UiHandler("goodbyeLink")

@@ -5,20 +5,19 @@
 
 <web-app>
 
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.wennovate.hommy.server.GreetingServiceImpl</servlet-class>
-  </servlet>
+	<!-- remote logging -->
+	<servlet>
+		<servlet-name>remoteLogging</servlet-name>
+		<servlet-class>com.google.gwt.logging.server.RemoteLoggingServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>remoteLogging</servlet-name>
+		<url-pattern>/hommy/remote_logging</url-pattern>
+	</servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/hommy/greet</url-pattern>
-  </servlet-mapping>
-
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>hommy.html</welcome-file>
-  </welcome-file-list>
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>hommy.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>

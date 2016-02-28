@@ -6,9 +6,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class Clouds extends JavaScriptObject {
 
 	// private int all;
-	// private Map<String, Object> additionalProperties = new HashMap<String,
-	// Object>();
-
+	
 	protected Clouds() {
 	}
 
@@ -19,7 +17,4 @@ public class Clouds extends JavaScriptObject {
 		return this.all;
 	}-*/;
 
-	// public final native Map<String, Object> getAdditionalProperties() /*-{
-	// return this.this.additionalProperties;
-	// }-*/;
 }

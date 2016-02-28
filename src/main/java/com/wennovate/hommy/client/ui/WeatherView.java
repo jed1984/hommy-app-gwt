@@ -4,7 +4,8 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.IsWidget;
 
 public interface WeatherView extends IsWidget {
-    void setName(String helloName);
+	public void setIcon(String iconId);
+    void setTemperature(String temperature);
     void setPresenter(Presenter presenter);
 
     public interface Presenter {

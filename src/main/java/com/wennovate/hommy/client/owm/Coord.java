@@ -7,8 +7,6 @@ public class Coord extends JavaScriptObject {
 
 	// private float lon;
 	// private float lat;
-	// private Map<String, Object> additionalProperties = new HashMap<String,
-	// Object>();
 
 	protected Coord() {
 	}
@@ -27,8 +25,5 @@ public class Coord extends JavaScriptObject {
 		 return this.lat;
 	}-*/;
 
-	// public final native Map<String, Object> getAdditionalProperties() /*-{
-	// return this.additionalProperties;
-	// }-*/;
 
 }

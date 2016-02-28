@@ -1,8 +1,6 @@
 
 package com.wennovate.hommy.client.owm;
 
-import java.util.Map;
-
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class Sys extends JavaScriptObject {
@@ -11,8 +9,6 @@ public class Sys extends JavaScriptObject {
 	// private String country;
 	// private int sunrise;
 	// private int sunset;
-	// private Map<String, Object> additionalProperties = new HashMap<String,
-	// Object>();
 
 	protected Sys() {
 	}
@@ -49,8 +45,5 @@ public class Sys extends JavaScriptObject {
 		return this.sunset;
 	}-*/;
 
-	public final native Map<String, Object> getAdditionalProperties() /*-{
-		return this.additionalProperties;
-	}-*/;
 
 }
