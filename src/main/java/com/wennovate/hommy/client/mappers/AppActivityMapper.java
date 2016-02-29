@@ -4,7 +4,7 @@ import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.wennovate.hommy.client.ClientFactory;
-import com.wennovate.hommy.client.activities.WeatherActivity;
+import com.wennovate.hommy.client.activities.RssActivity;
 import com.wennovate.hommy.client.places.HomePlace;
 
 public class AppActivityMapper implements ActivityMapper {
@@ -18,7 +18,7 @@ public class AppActivityMapper implements ActivityMapper {
     @Override
     public Activity getActivity(Place place) {
         if (place instanceof HomePlace)
-            return new WeatherActivity((HomePlace) place, clientFactory);
+            return new RssActivity((HomePlace) place, clientFactory);
         return null;
     }
 }

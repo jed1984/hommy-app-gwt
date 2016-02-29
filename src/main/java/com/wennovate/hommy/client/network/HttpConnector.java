@@ -155,8 +155,7 @@ public class HttpConnector {
 		}
 	}
 
-	public static <T extends JavaScriptObject> T getRequestSync(String url, final Class<T> classOfT)
-			throws Exception {
+	public static <T extends JavaScriptObject> T getRequestSync(String url, final Class<T> classOfT) throws Exception {
 		Map<String, String> headers = new HashMap<String, String>();
 		// headers.put(HEADER_SESSION_ID, sessionId);
 		return getRequestSync(url, headers, null, classOfT);
