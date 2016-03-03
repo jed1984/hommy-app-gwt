@@ -1,25 +1,22 @@
 package com.wennovate.hommy.client.activities;
 
+import com.google.gwt.activity.shared.AbstractActivity;
+
 public abstract class ActivityBase extends AbstractActivity implements InitializableActivity {
 
-	@Inject
-	protected MessageDialog dialog;
-
-	protected Place place;
+	// @Inject
+	// protected MessageDialog dialog;
 
 	protected ActivityConfiguration activityConfig;
-	;
 
-	public void initialize(Place place, ActivityConfiguration activityConfiguration, Map<String, String> activityParameters){
-		this.place=place;
-		this.activityConfig=activityConfiguration;
-		this.activityParameters = activityParameters;
+	public void initialize(ActivityConfiguration activityConfiguration) {
+		this.activityConfig = activityConfiguration;
 	}
 
 	@Override
 	public void onStop() {
 
-		dialog.hide();
+		// dialog.hide();
 
 		super.onStop();
 	}
