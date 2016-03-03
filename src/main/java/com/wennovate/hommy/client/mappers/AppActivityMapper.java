@@ -10,6 +10,9 @@ import com.wennovate.hommy.client.places.HomePlace;
 public class AppActivityMapper implements ActivityMapper {
     private ClientFactory clientFactory;
 
+    
+    
+    
     public AppActivityMapper(ClientFactory clientFactory) {
         super();
         this.clientFactory = clientFactory;
@@ -17,8 +20,9 @@ public class AppActivityMapper implements ActivityMapper {
 
     @Override
     public Activity getActivity(Place place) {
-        if (place instanceof HomePlace)
+        if (place instanceof HomePlace){
             return new RssActivity((HomePlace) place, clientFactory);
+        }
         return null;
     }
 }

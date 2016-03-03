@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<application fileVersion="1.0">
+	
+	<activities>
+		<activity name="Empty" class-name="NullActivity"/>
+		<activity name="Weather" class-name="WeatherActivity" city="Milan"/>
+		<activity name="Clock" class-name="ClockActivity"/>
+	</activities>
+	
+	<Regions>
+	    <Region position="TOP_LEFT" activity-name="Clock"/>
+	    <Region position="TOP_RIGHT" activity-name="Weather"/>
+	</Regions>
+	
+</application>
