@@ -46,8 +46,8 @@ public class RegionActivityMapper implements ActivityMapper {
 		ActivityConfiguration activityConfig = applicationConfig.getActivityConfiguration(regionPosition);
 
 		if (activityConfig == null || activityConfig.getName() == null) {
-			logger.warn("Cannot retrieve activity configuration for region position" + regionPosition
-					+ ". Returning null activity ...");
+			logger.warn("Cannot retrieve activity configuration for region position " + regionPosition
+					+ " returning NullActivity ...");
 			currentActivity = nullActivity;
 			currentActivityName = null;
 		} else if (currentActivity == null || currentActivityName == null
@@ -68,15 +68,16 @@ public class RegionActivityMapper implements ActivityMapper {
 		return currentActivity;
 	}
 
-	public <T extends InitializableActivity> T getActivity(Class<T> clazz, Place place, ActivityConfiguration activityConfiguration) {
+	public <T extends InitializableActivity> T getActivity(Class<T> clazz, Place place,
+			ActivityConfiguration activityConfiguration) {
 		T ret = activityFactory.getActivity(clazz);
-		if(ret != null) {
+		if (ret != null) {
 			ret.initialize(activityConfiguration);
 		}
 		return ret;
 	}
 
-	private InitializableActivity getActivity(String simpleClazzName) {	
+	private InitializableActivity getActivity(String simpleClazzName) {
 		return activityFactory.getActivity(simpleClazzName);
 	}
 

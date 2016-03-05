@@ -39,7 +39,7 @@ public class RssActivity extends ActivityBase implements RssView.Presenter {
 		// helloView.setName(items.toString());
 
 		try {
-			List<RssItem> items = RssApi.getRssFeedItems(RssApi.REPUBBLICA_FEED);
+			List<RssItem> items = RssApi.getRssFeedItems(RssApi.GAZZETTA_FEED);
 
 			VerticalPanel itemsVPanel = new VerticalPanel();
 			itemsVPanel.setSpacing(5);

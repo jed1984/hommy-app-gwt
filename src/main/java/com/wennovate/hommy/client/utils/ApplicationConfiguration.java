@@ -91,12 +91,18 @@ public class ApplicationConfiguration {
 		// }
 		// return appConfig.getContent();
 
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" + "<application fileVersion=\"1.0\">"
-				+ "<activities>" + "<activity name=\"Empty\" class-name=\"NullActivity\"/>"
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
+		"<application fileVersion=\"1.0\">"
+				+ "<activities>" 
+				+ "<activity name=\"Empty\" class-name=\"NullActivity\"/>"
 				+ "<activity name=\"Weather\" class-name=\"WeatherActivity\" city=\"Milan\"/>"
-				+ "<activity name=\"Clock\" class-name=\"ClockActivity\"/>" + "</activities>" + "<regions>"
+				+ "<activity name=\"Clock\" class-name=\"ClockActivity\"/>" 
+				+"		<activity name=\"Rss\" class-name=\"RssActivity\"/>"
+				+ "</activities>" + "<regions>"
 				+ "<region position=\"TOP_LEFT\" activity-name=\"Clock\"/>"
-				+ "<region position=\"TOP_RIGHT\" activity-name=\"Weather\"/>" + "</regions>" + "</application>";
+				+ "<region position=\"TOP_RIGHT\" activity-name=\"Rss\"/>" 
+				+ "</regions>" 
+				+ "</application>";
 	}
 
 	// ////////////////////////////////////////////

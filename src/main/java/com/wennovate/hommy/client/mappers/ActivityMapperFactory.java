@@ -21,8 +21,10 @@ public class ActivityMapperFactory {
 	protected Map<String, Provider<? extends InitializableActivity>> registeredActivities = new HashMap<>();
 
 	@Inject
-	public ActivityMapperFactory(Provider<RssActivity> rssActivity, Provider<WeatherActivity> weatherActivity,
-			Provider<ClockActivity> clockActivity, Provider<NullActivity> nullActivity) {
+	public ActivityMapperFactory(Provider<RssActivity> rssActivity, 
+			Provider<WeatherActivity> weatherActivity,
+			Provider<ClockActivity> clockActivity, 
+			Provider<NullActivity> nullActivity) {
 		registeredActivities.put(RssActivity.class.getSimpleName(), rssActivity);
 		registeredActivities.put(WeatherActivity.class.getSimpleName(), weatherActivity);
 		registeredActivities.put(ClockActivity.class.getSimpleName(), clockActivity);
