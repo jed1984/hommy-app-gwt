@@ -1,21 +1,19 @@
 package com.wennovate.hommy.client;
 
+import java.util.HashMap;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.google.gwt.activity.shared.ActivityManager;
-import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.place.shared.Place;
-import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.place.shared.PlaceHistoryHandler;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.wennovate.hommy.client.mappers.AppActivityMapper;
-import com.wennovate.hommy.client.mappers.AppPlaceHistoryMapper;
-import com.wennovate.hommy.client.places.HomePlace;
+import com.google.gwt.user.client.ui.Widget;
+import com.wennovate.hommy.client.Region.Position;
+import com.wennovate.hommy.client.mappers.RegionActivityMapper;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -23,39 +21,55 @@ import com.wennovate.hommy.client.places.HomePlace;
 public class Hommy implements EntryPoint {
 	private static final Logger logger = LogManager.getLogger(Hommy.class);
 
-	private Place defaultPlace = new HomePlace("World!");
-    private SimplePanel appWidget = new SimplePanel();
-    
+	private final AppGinjector injector = GWT.create(AppGinjector.class);
+
 	/**
 	 * Create a remote service proxy to talk to the server-side Greeting
 	 * service.
 	 */
-	private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+	//private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
 	private final Messages messages = GWT.create(Messages.class);
+
+	private HashMap<Position, Widget> regions = new HashMap<>();
+	private HashMap<Position, RegionActivityMapper> regionsActivityMapper = new HashMap<>();
 
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
 		logger.info("************ onModuleLoad ************");
-		
-		ClientFactory clientFactory = GWT.create(ClientFactory.class);
-        EventBus eventBus = clientFactory.getEventBus();
-        PlaceController placeController = clientFactory.getPlaceController();
+		FlowPanel container = new FlowPanel();
+		container.ensureDebugId("cwFlowPanel");
 
-        // Start ActivityManager for the main widget with our ActivityMapper
-        ActivityMapper activityMapper = new AppActivityMapper(clientFactory);
-        ActivityManager activityManager = new ActivityManager(activityMapper, eventBus);
-        activityManager.setDisplay(appWidget);
+		// Add some content to the panel
+		for (Position p : Position.values()) {
+			container.add(createRegion(p));
+		}
 
-        // Start PlaceHistoryHandler with our PlaceHistoryMapper
-        AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
-        PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
-        historyHandler.register(placeController, eventBus, defaultPlace);
+		RootPanel.get().add(container);
 
-        RootPanel.get().add(appWidget);
-        // Goes to the place represented on URL else default place
-        historyHandler.handleCurrentHistory();
+		// Goes to the place represented on URL else default place
+		injector.placeHistoryHandler().handleCurrentHistory();
+	}
+
+	private Widget createRegion(Position position) {
+		return createRegion(position, new SimplePanel());
+	}
+
+	private Widget createRegion(Position position, SimplePanel regionPanel) {
+		// Region configuration
+		String positionName = position.name();
+		regionPanel.getElement().setId(positionName);
+		regionPanel.getElement().setClassName(positionName);
+		regionPanel.getElement().setPropertyObject("functions", new Object());
+
+		RegionActivityMapper regionActivityMapper = injector.regionActivityMapperFactory().create(position);
+		ActivityManager regionActivityManager = new ActivityManager(regionActivityMapper, injector.eventBus());
+		regionActivityManager.setDisplay(regionPanel);
+		regions.put(position, regionPanel);
+		regionsActivityMapper.put(position, regionActivityMapper);
+
+		return regionPanel;
 	}
 }

@@ -22,7 +22,7 @@ import com.wennovate.hommy.client.exceptions.ConfigurationException;
 public class ApplicationConfiguration {
 	private static final Logger logger = LogManager.getLogger(ApplicationConfiguration.class);
 
-	private static final String NAME = "application-configuration";
+	private static final String NAME = "application-config.xml";
 
 	private Map<String, String> metadata;
 
@@ -33,7 +33,8 @@ public class ApplicationConfiguration {
 	private ApplicationConfiguration() throws ConfigurationException {
 		logger.info("Application config loading...");
 
-		String text = File.loadTextFileSync(getApplicationConfig());
+		// String text = File.loadTextFileSync(getApplicationConfig());
+		String text = getApplicationConfig();
 		Document applicationDocument = XMLParser.parse(text);
 		parseConfigurations(applicationDocument);
 	}
@@ -73,20 +74,29 @@ public class ApplicationConfiguration {
 	}
 
 	private String getApplicationConfig() throws ConfigurationException {
-		NodeList<com.google.gwt.dom.client.Element> list = com.google.gwt.dom.client.Document.get()
-				.getElementsByTagName(MetaElement.TAG);
-		int found = 0;
-		MetaElement appConfig = null;
-		for (int i = 0; i < list.getLength(); i++) {
-			if (MetaElement.as(list.getItem(i)).getName().equals(NAME)) {
-				appConfig = MetaElement.as(list.getItem(i));
-				found++;
-			}
-		}
-		if (found != 1) {
-			throw new ConfigurationException("Application Configuration not found!");
-		}
-		return appConfig.getContent();
+		// NodeList<com.google.gwt.dom.client.Element> list =
+		// com.google.gwt.dom.client.Document.get()
+		// .getElementsByTagName(MetaElement.TAG);
+		// int found = 0;
+		// MetaElement appConfig = null;
+		// for (int i = 0; i < list.getLength(); i++) {
+		// if (MetaElement.as(list.getItem(i)).getName().equals(NAME)) {
+		// appConfig = MetaElement.as(list.getItem(i));
+		// found++;
+		// }
+		// }
+		// if (found != 1) {
+		// throw new ConfigurationException("Application Configuration not
+		// found!");
+		// }
+		// return appConfig.getContent();
+
+		return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" + "<application fileVersion=\"1.0\">"
+				+ "<activities>" + "<activity name=\"Empty\" class-name=\"NullActivity\"/>"
+				+ "<activity name=\"Weather\" class-name=\"WeatherActivity\" city=\"Milan\"/>"
+				+ "<activity name=\"Clock\" class-name=\"ClockActivity\"/>" + "</activities>" + "<regions>"
+				+ "<region position=\"TOP_LEFT\" activity-name=\"Clock\"/>"
+				+ "<region position=\"TOP_RIGHT\" activity-name=\"Weather\"/>" + "</regions>" + "</application>";
 	}
 
 	// ////////////////////////////////////////////
@@ -94,7 +104,7 @@ public class ApplicationConfiguration {
 	// ////////////////////////////////////////////
 
 	public ActivityConfiguration getActivityConfiguration(Position regionPosition) {
-		if (regions != null) {
+		if (regions != null && regions.get(regionPosition.name()) != null) {
 			String activityName = regions.get(regionPosition.name()).getActivityName();
 			return activities.get(activityName);
 		}

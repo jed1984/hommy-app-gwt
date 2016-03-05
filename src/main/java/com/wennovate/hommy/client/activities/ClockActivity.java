@@ -1,23 +1,22 @@
 package com.wennovate.hommy.client.activities;
 
-import com.google.gwt.activity.shared.AbstractActivity;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.wennovate.hommy.client.ClientFactory;
-import com.wennovate.hommy.client.places.HomePlace;
+import com.google.inject.Inject;
 import com.wennovate.hommy.client.ui.ClockView;
 
-public class ClockActivity extends AbstractActivity implements ClockView.Presenter {
-	// Used to obtain views, eventBus, placeController
-	// Alternatively, could be injected via GIN
-	private ClientFactory clientFactory;
-	// Name that will be appended to "Hello,"
-	private String name;
+public class ClockActivity extends ActivityBase implements ClockView.Presenter {
+	private static final Logger logger = LogManager.getLogger(ClockActivity.class);
 
-	public ClockActivity(HomePlace place, ClientFactory clientFactory) {
-		// this.name = place.getHelloName();
-		this.clientFactory = clientFactory;
+	private ClockView view;
+
+	@Inject
+	public ClockActivity(ClockView view) {
+		this.view = view;
 	}
 
 	/**
@@ -25,11 +24,10 @@ public class ClockActivity extends AbstractActivity implements ClockView.Present
 	 */
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
-		ClockView helloView = clientFactory.getClockView();
-		helloView.setName(name);
-		helloView.setPresenter(this);
-		containerWidget.setWidget(helloView.asWidget());
-		
+		view.setName("TEST");
+		view.setPresenter(this);
+		containerWidget.setWidget(view.asWidget());
+
 		test();
 	}
 
@@ -39,19 +37,6 @@ public class ClockActivity extends AbstractActivity implements ClockView.Present
 	@Override
 	public String mayStop() {
 		return "Please hold on. This activity is stopping.";
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		// TODO Kill intervall
-	}
-	
-	/**
-	 * Navigate to a new Place in the browser
-	 */
-	public void goTo(Place place) {
-		clientFactory.getPlaceController().goTo(place);
 	}
 
 	public native void test()/*-{
@@ -83,5 +68,11 @@ public class ClockActivity extends AbstractActivity implements ClockView.Present
 		// Calling ticktock() every 1 second
 		setInterval(ticktock, 1000);
 	}-*/;
+
+	@Override
+	public void goTo(Place place) {
+		// TODO 
+
+	}
 
 }

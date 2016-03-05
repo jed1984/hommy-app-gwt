@@ -1,8 +1,5 @@
 package com.wennovate.hommy.client.mappers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -19,11 +16,13 @@ import com.wennovate.hommy.client.utils.ApplicationConfiguration;
 
 public class RegionActivityMapper implements ActivityMapper {
 	private static final Logger logger = LogManager.getLogger(RegionActivityMapper.class);
+
 	private final Position regionPosition;
-	private AppActivityMapper baseActivityFactory;
+
+	private ActivityMapperFactory activityFactory;
 
 	public interface RegionActivityMapperFactory {
-		RegionActivityMapper create(@Assisted("regionId") String regionId);
+		RegionActivityMapper create(@Assisted("regionPosition") Position regionPosition);
 	}
 
 	private String currentActivityName;
@@ -33,8 +32,8 @@ public class RegionActivityMapper implements ActivityMapper {
 	private NullActivity nullActivity;
 
 	@Inject
-	RegionActivityMapper(AppActivityMapper baseActivityFactory, @Assisted("regionId") Position regionPosition) {
-		this.baseActivityFactory = baseActivityFactory;
+	RegionActivityMapper(ActivityMapperFactory activityFactory, @Assisted("regionPosition") Position regionPosition) {
+		this.activityFactory = activityFactory;
 		this.regionPosition = regionPosition;
 		this.currentActivity = null;
 		this.currentActivityName = null;
@@ -44,38 +43,41 @@ public class RegionActivityMapper implements ActivityMapper {
 	public Activity getActivity(Place place) {
 		ApplicationConfiguration applicationConfig = ApplicationConfiguration.get();
 
-		ActivityConfiguration activityConfig = applicationConfig.getActivityConfiguration(regionPosition);		
+		ActivityConfiguration activityConfig = applicationConfig.getActivityConfiguration(regionPosition);
 
-		if(activityConfig == null || activityConfig.getName() == null) {
-			logger.warn("Cannot retrieve activity configuration for region position" + regionPosition + ". Returning null activity ...");
+		if (activityConfig == null || activityConfig.getName() == null) {
+			logger.warn("Cannot retrieve activity configuration for region position" + regionPosition
+					+ ". Returning null activity ...");
 			currentActivity = nullActivity;
 			currentActivityName = null;
-		} else if(currentActivity == null || currentActivityName == null || !currentActivityName.equals(activityConfig.getName())) {
+		} else if (currentActivity == null || currentActivityName == null
+				|| !currentActivityName.equals(activityConfig.getName())) {
 			currentActivity = getActivity(activityConfig.getClazzName());
 			currentActivityName = activityConfig.getName();
-			logger.info("Replacing activity for place " + place + " and region " + regionPosition + " to " + currentActivityName + ".");
+			logger.info("Replacing activity for place " + place + " and region " + regionPosition + " to "
+					+ currentActivityName + ".");
 		} else {
-			logger.info("Keeping cached activity " + currentActivityName + " for place " + place + " and region " + regionPosition + ".");
+			logger.info("Keeping cached activity " + currentActivityName + " for place " + place + " and region "
+					+ regionPosition + ".");
 		}
 
-		if(currentActivity != null) {
+		if (currentActivity != null) {
 			currentActivity.initialize(activityConfig);
 		}
 
 		return currentActivity;
 	}
 
-	public <T extends InitializableActivity> T getActivity(Class<T> clazz, ActivityConfiguration activityConfiguration) {
-		T ret = baseActivityFactory.getActivity(clazz);
+	public <T extends InitializableActivity> T getActivity(Class<T> clazz, Place place, ActivityConfiguration activityConfiguration) {
+		T ret = activityFactory.getActivity(clazz);
 		if(ret != null) {
-			ret.initialize( activityConfiguration);
+			ret.initialize(activityConfiguration);
 		}
 		return ret;
 	}
 
 	private InitializableActivity getActivity(String simpleClazzName) {	
-		return baseActivityFactory.getActivity(simpleClazzName);
+		return activityFactory.getActivity(simpleClazzName);
 	}
-
 
 }

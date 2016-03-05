@@ -5,34 +5,26 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.wennovate.hommy.client.ClientFactory;
-import com.wennovate.hommy.client.places.HomePlace;
+import com.google.inject.Inject;
 import com.wennovate.hommy.client.rss.RssApi;
 import com.wennovate.hommy.client.rss.RssItem;
 import com.wennovate.hommy.client.ui.RssView;
 
-public class RssActivity extends AbstractActivity implements RssView.Presenter {
+public class RssActivity extends ActivityBase implements RssView.Presenter {
 	private static final Logger logger = LogManager.getLogger(RssActivity.class);
 
-	// Used to obtain views, eventBus, placeController
-	// Alternatively, could be injected via GIN
-	private ClientFactory clientFactory;
-	// Name that will be appended to "Hello,"
-	private String name;
+	private RssView view;
 
-	public RssActivity(HomePlace place, ClientFactory clientFactory) {
-		// this.name = place.getHelloName();
-		this.clientFactory = clientFactory;
+	@Inject
+	public RssActivity(RssView view) {
+		this.view = view;
 	}
 
 	/**
@@ -71,16 +63,8 @@ public class RssActivity extends AbstractActivity implements RssView.Presenter {
 	}
 
 	@Override
-	public void onStop() {
-		super.onStop();
-		// TODO Kill intervall
-	}
-
-	/**
-	 * Navigate to a new Place in the browser
-	 */
 	public void goTo(Place place) {
-		clientFactory.getPlaceController().goTo(place);
+		// TODO Auto-generated method stub
+		
 	}
-
 }
