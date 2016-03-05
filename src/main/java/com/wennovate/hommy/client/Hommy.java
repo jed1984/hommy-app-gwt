@@ -29,7 +29,7 @@ public class Hommy implements EntryPoint {
 	 */
 	//private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
-	private final Messages messages = GWT.create(Messages.class);
+	//private final Messages messages = GWT.create(Messages.class);
 
 	private HashMap<Position, Widget> regions = new HashMap<>();
 	private HashMap<Position, RegionActivityMapper> regionsActivityMapper = new HashMap<>();

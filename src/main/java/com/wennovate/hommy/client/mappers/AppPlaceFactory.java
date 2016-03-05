@@ -1,4 +1,4 @@
-package com.wennovate.hommy.client;
+package com.wennovate.hommy.client.mappers;
 
 import com.google.gwt.place.shared.Place;
 import com.google.inject.ImplementedBy;

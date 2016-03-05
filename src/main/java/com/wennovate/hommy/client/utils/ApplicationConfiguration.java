@@ -100,7 +100,7 @@ public class ApplicationConfiguration {
 				+"		<activity name=\"Rss\" class-name=\"RssActivity\"/>"
 				+ "</activities>" + "<regions>"
 				+ "<region position=\"TOP_LEFT\" activity-name=\"Clock\"/>"
-				+ "<region position=\"TOP_RIGHT\" activity-name=\"Rss\"/>" 
+				+ "<region position=\"TOP_RIGHT\" activity-name=\"Weather\"/>" 
 				+ "</regions>" 
 				+ "</application>";
 	}

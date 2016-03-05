@@ -16,10 +16,10 @@ public class ClockViewImpl extends Composite implements ClockView {
 	interface ClockViewImplUiBinder extends UiBinder<Widget, ClockViewImpl> {
 	}
 
-	@UiField
-	SpanElement nameSpan;
-	@UiField
-	Anchor goodbyeLink;
+//	@UiField
+//	SpanElement nameSpan;
+//	@UiField
+//	Anchor goodbyeLink;
 
 	private Presenter presenter;
 	private String name;
@@ -31,13 +31,13 @@ public class ClockViewImpl extends Composite implements ClockView {
 	@Override
 	public void setName(String name) {
 		this.name = name;
-		nameSpan.setInnerText(name);
+//		nameSpan.setInnerText(name);
 	}
-
-	@UiHandler("goodbyeLink")
-	void onClickGoodbye(ClickEvent e) {
-		// presenter.goTo(new GoodbyePlace(name));
-	}
+//
+//	@UiHandler("goodbyeLink")
+//	void onClickGoodbye(ClickEvent e) {
+//		// presenter.goTo(new GoodbyePlace(name));
+//	}
 
 	@Override
 	public void setPresenter(Presenter presenter) {

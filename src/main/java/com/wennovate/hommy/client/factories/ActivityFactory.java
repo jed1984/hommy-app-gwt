@@ -1,4 +1,4 @@
-package com.wennovate.hommy.client.mappers;
+package com.wennovate.hommy.client.factories;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,13 +15,13 @@ import com.wennovate.hommy.client.activities.NullActivity;
 import com.wennovate.hommy.client.activities.RssActivity;
 import com.wennovate.hommy.client.activities.WeatherActivity;
 
-public class ActivityMapperFactory {
-	private static final Logger logger = LogManager.getLogger(ActivityMapperFactory.class);
+public class ActivityFactory {
+	private static final Logger logger = LogManager.getLogger(ActivityFactory.class);
 
 	protected Map<String, Provider<? extends InitializableActivity>> registeredActivities = new HashMap<>();
 
 	@Inject
-	public ActivityMapperFactory(Provider<RssActivity> rssActivity, 
+	public ActivityFactory(Provider<RssActivity> rssActivity, 
 			Provider<WeatherActivity> weatherActivity,
 			Provider<ClockActivity> clockActivity, 
 			Provider<NullActivity> nullActivity) {

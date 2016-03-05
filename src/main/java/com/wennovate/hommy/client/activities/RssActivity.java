@@ -32,12 +32,6 @@ public class RssActivity extends ActivityBase implements RssView.Presenter {
 	 */
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
-		// RssView helloView = clientFactory.getRssView();
-		// helloView.setName(name);
-		// helloView.setPresenter(this);
-		// containerWidget.setWidget(helloView.asWidget());
-		// helloView.setName(items.toString());
-
 		try {
 			List<RssItem> items = RssApi.getRssFeedItems(RssApi.GAZZETTA_FEED);
 

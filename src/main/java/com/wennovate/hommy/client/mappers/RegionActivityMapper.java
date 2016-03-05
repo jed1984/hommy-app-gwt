@@ -12,6 +12,7 @@ import com.wennovate.hommy.client.Region.Position;
 import com.wennovate.hommy.client.activities.ActivityConfiguration;
 import com.wennovate.hommy.client.activities.InitializableActivity;
 import com.wennovate.hommy.client.activities.NullActivity;
+import com.wennovate.hommy.client.factories.ActivityFactory;
 import com.wennovate.hommy.client.utils.ApplicationConfiguration;
 
 public class RegionActivityMapper implements ActivityMapper {
@@ -19,7 +20,7 @@ public class RegionActivityMapper implements ActivityMapper {
 
 	private final Position regionPosition;
 
-	private ActivityMapperFactory activityFactory;
+	private ActivityFactory activityFactory;
 
 	public interface RegionActivityMapperFactory {
 		RegionActivityMapper create(@Assisted("regionPosition") Position regionPosition);
@@ -32,7 +33,7 @@ public class RegionActivityMapper implements ActivityMapper {
 	private NullActivity nullActivity;
 
 	@Inject
-	RegionActivityMapper(ActivityMapperFactory activityFactory, @Assisted("regionPosition") Position regionPosition) {
+	RegionActivityMapper(ActivityFactory activityFactory, @Assisted("regionPosition") Position regionPosition) {
 		this.activityFactory = activityFactory;
 		this.regionPosition = regionPosition;
 		this.currentActivity = null;

@@ -10,7 +10,7 @@
         Hello,
         <span class="{style.important}" ui:field="nameSpan" />
         <div id="test"></div>
-        <g:Image url="images/document-statut-1.gif" ui:field="imageWidget"
+        <g:Image ui:field="imageWidget"
          title="My title" altText="My alt" />
         <g:Anchor ui:field="goodbyeLink" text="Say good-bye"></g:Anchor>
     </g:HTMLPanel>

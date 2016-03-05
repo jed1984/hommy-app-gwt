@@ -13,6 +13,7 @@ import com.google.gwt.place.shared.PlaceHistoryHandler.Historian;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import com.wennovate.hommy.client.mappers.AppPlaceFactory;
 import com.wennovate.hommy.client.mappers.AppPlaceHistoryMapper;
 import com.wennovate.hommy.client.mappers.RegionActivityMapper.RegionActivityMapperFactory;
 import com.wennovate.hommy.client.places.HomePlace;
