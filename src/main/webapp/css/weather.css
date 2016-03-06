@@ -1,0 +1,69 @@
+#weather {
+	padding: 40px;
+	background-color: #f3f3f3;
+	color: #272e38;
+}
+
+#weather h1 {
+	color: #ffffff;
+	font-family: 'Lato', sans-serif;
+	font-size: 54px;
+	font-weight: 300;
+	margin: 0 0 58px;
+}
+
+#weather p {
+	color: #adb7bd;
+	font-family: 'Lucida Sans', Arial, sans-serif;
+	font-size: 16px;
+	text-indent: 30px;
+	margin: 0;
+}
+
+#weather a {
+	color: #fe921f;
+	text-decoration: underline;
+}
+
+#weather a:hover {
+	color: #ffffff
+}
+
+#weather .current {
+	display: flex;
+	flex-direction: row;
+	background-color: rgb(23, 57, 85);
+}
+
+#weather .current .left, #weather .current .right {
+	flex-grow: 1;
+	display: flex;
+	flex-flow: column;
+}
+
+#weather .current-temperature {
+	font-weight: bold;
+	font-size: 5em;
+	flex-grow: 4;
+}
+
+#weather .gwt-Image {
+	width: 80%;
+}
+
+#weather .city {
+	font-size: 25px;
+	margin: 10px;
+}
+
+#weather .rain {
+	
+}
+
+#weather .wind {
+	
+}
+
+#weather .clouds {
+	
+}

@@ -7,6 +7,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
+import com.wennovate.hommy.client.activities.ActivityConfiguration.Properties;
 import com.wennovate.hommy.client.owm.ForecastResponse;
 import com.wennovate.hommy.client.owm.WeatherApi;
 import com.wennovate.hommy.client.owm.WeatherResponse;
@@ -27,18 +28,18 @@ public class WeatherActivity extends ActivityBase implements WeatherView.Present
 	 */
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
-		view.setTemperature("TEST");
-		view.setPresenter(this);
 		containerWidget.setWidget(view.asWidget());
 
+		view.setPresenter(this);
 		try {
-			WeatherResponse weatherRes = WeatherApi.getCurrentWeatherByCity("Milan", "Italy");
-
+			WeatherResponse weatherRes = WeatherApi.getCurrentWeatherByCity(getProperty(Properties.CITY),
+					getProperty(Properties.COUNTRY));
+			view.updateCurrentWeather(weatherRes);
 			ForecastResponse forecastRes = WeatherApi.getForecastByCity("Milan", "Italy");
-			view.setTemperature("TEMP IS: " + weatherRes.getMain().getTemp() + " - TOMORROW MAX: "
+			logger.info("TEMP IS: " + weatherRes.getMain().getTemp() + " - TOMORROW MAX: "
 					+ forecastRes.getList().get(0).getTemp().getMax() + " - TOMORROW MIN: "
 					+ forecastRes.getList().get(0).getTemp().getMin());
-			view.setIcon(weatherRes.getWeather().get(0).getIcon());
+			logger.info("ICON:" + weatherRes.getWeather().get(0).getIcon());
 			logger.info(weatherRes.getMain().getTemp());
 		} catch (Exception e) {
 			logger.error(e);

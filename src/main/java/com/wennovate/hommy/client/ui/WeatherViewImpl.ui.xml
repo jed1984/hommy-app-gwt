@@ -1,17 +1,23 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-             xmlns:g="urn:import:com.google.gwt.user.client.ui">
-    <ui:style>
-        .important {
-            font-weight: bold;
-        }
-    </ui:style>
-    <g:HTMLPanel>
-        Hello,
-        <span class="{style.important}" ui:field="nameSpan" />
-        <div id="test"></div>
-        <g:Image ui:field="imageWidget"
-         title="My title" altText="My alt" />
-        <g:Anchor ui:field="goodbyeLink" text="Say good-bye"></g:Anchor>
-    </g:HTMLPanel>
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:HTMLPanel>
+		<div id="weather">
+			<div class="current">
+				<div class="left">
+					<p ui:field="city" class="city"/>
+					<p ui:field="currentTemperature" class="current-temperature" />
+					<p ui:field="highestTemperature" />
+					<p ui:field="lowestTemperature" />
+				</div>
+				<div class="right">
+					<g:Image ui:field="weatherIcon" />
+					<p ui:field="weatherDescription" />
+					<p ui:field="rain" class="rain" />
+					<p ui:field="wind" class="wind" />
+					<p ui:field="clouds" class="clouds" />
+				</div>
+			</div>
+		</div>
+	</g:HTMLPanel>
 </ui:UiBinder>

@@ -333,37 +333,3 @@
 	right:20px;
 	font-size:12px;
 }
-
-
-/*-------------------------
-		Button
---------------------------*/
-
-
-.button-holder{
-	text-align:center;
-	padding-bottom:100px;
-}
-
-a.button{
-	background-color:#f6a7b3;
-	
-	background-image:-webkit-linear-gradient(top, #f6a7b3, #f0a3af);
-	background-image:-moz-linear-gradient(top, #f6a7b3, #f0a3af);
-	background-image:linear-gradient(top, #f6a7b3, #f0a3af);
-
-	border:1px solid #eb9ba7;
-	border-radius:2px;
-
-	box-shadow:0 2px 2px #ccc;
-
-	color:#fff;
-	text-decoration: none !important;
-	padding:15px 20px;
-	display:inline-block;
-	cursor:pointer;
-}
-
-a.button:hover{
-	opacity:0.9;
-}

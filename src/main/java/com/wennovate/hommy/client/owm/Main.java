@@ -41,28 +41,28 @@ public class Main extends JavaScriptObject {
 	 * @return The tempMin
 	 */
 	public final native float getTempMin() /*-{
-		return this.tempMin;
+		return this.temp_min;
 	}-*/;
 
 	/**
 	 * @return The tempMax
 	 */
 	public final native float getTempMax() /*-{
-		return this.tempMax;
+		return this.temp_max;
 	}-*/;
 
 	/**
 	 * @return The seaLevel
 	 */
 	public final native float getSeaLevel() /*-{
-		return this.seaLevel;
+		return this.sea_level;
 	}-*/;
 
 	/**
 	 * @return The grndLevel
 	 */
 	public final native float getGrndLevel() /*-{
-		return this.grndLevel;
+		return this.grnd_level;
 	}-*/;
 
 

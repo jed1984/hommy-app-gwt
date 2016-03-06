@@ -13,6 +13,10 @@ public abstract class ActivityBase extends AbstractActivity implements Initializ
 		this.activityConfig = activityConfiguration;
 	}
 
+	public String getProperty(String prop) {
+		return activityConfig.getProperties().get(prop);
+	}
+
 	@Override
 	public void onStop() {
 

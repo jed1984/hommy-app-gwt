@@ -74,35 +74,33 @@ public class ApplicationConfiguration {
 	}
 
 	private String getApplicationConfig() throws ConfigurationException {
-		// NodeList<com.google.gwt.dom.client.Element> list =
-		// com.google.gwt.dom.client.Document.get()
-		// .getElementsByTagName(MetaElement.TAG);
-		// int found = 0;
-		// MetaElement appConfig = null;
-		// for (int i = 0; i < list.getLength(); i++) {
-		// if (MetaElement.as(list.getItem(i)).getName().equals(NAME)) {
-		// appConfig = MetaElement.as(list.getItem(i));
-		// found++;
-		// }
-		// }
-		// if (found != 1) {
-		// throw new ConfigurationException("Application Configuration not
-		// found!");
-		// }
-		// return appConfig.getContent();
+		NodeList<com.google.gwt.dom.client.Element> list = com.google.gwt.dom.client.Document.get()
+				.getElementsByTagName(MetaElement.TAG);
+		int found = 0;
+		MetaElement appConfig = null;
+		for (int i = 0; i < list.getLength(); i++) {
+			if (MetaElement.as(list.getItem(i)).getName().equals(NAME)) {
+				appConfig = MetaElement.as(list.getItem(i));
+				found++;
+			}
+		}
+		if (found != 1) {
+			throw new ConfigurationException("Application Configuration not found!");
+		}
+		return appConfig.getContent();
 
-		return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
-		"<application fileVersion=\"1.0\">"
-				+ "<activities>" 
-				+ "<activity name=\"Empty\" class-name=\"NullActivity\"/>"
-				+ "<activity name=\"Weather\" class-name=\"WeatherActivity\" city=\"Milan\"/>"
-				+ "<activity name=\"Clock\" class-name=\"ClockActivity\"/>" 
-				+"		<activity name=\"Rss\" class-name=\"RssActivity\"/>"
-				+ "</activities>" + "<regions>"
-				+ "<region position=\"TOP_LEFT\" activity-name=\"Clock\"/>"
-				+ "<region position=\"TOP_RIGHT\" activity-name=\"Weather\"/>" 
-				+ "</regions>" 
-				+ "</application>";
+//		return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
+//		"<application fileVersion=\"1.0\">"
+//				+ "<activities>" 
+//				+ "<activity name=\"Empty\" class-name=\"NullActivity\"/>"
+//				+ "<activity name=\"Weather\" class-name=\"WeatherActivity\" city=\"Milan\" country=\"Italy\"/>"
+//				+ "<activity name=\"Clock\" class-name=\"ClockActivity\"/>" 
+//				+"		<activity name=\"Rss\" class-name=\"RssActivity\"/>"
+//				+ "</activities>" + "<regions>"
+//				+ "<region position=\"TOP_LEFT\" activity-name=\"Clock\"/>"
+//				+ "<region position=\"TOP_RIGHT\" activity-name=\"Weather\"/>" 
+//				+ "</regions>" 
+//				+ "</application>";
 	}
 
 	// ////////////////////////////////////////////

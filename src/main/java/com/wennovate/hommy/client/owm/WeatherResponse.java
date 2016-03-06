@@ -12,12 +12,13 @@ public class WeatherResponse extends JavaScriptObject {
 	// private Main main;
 	// private Wind wind;
 	// private Clouds clouds;
+	// private Rain rain;
 	// private int dt;
 	// private Sys sys;
 	// private int id;
 	// private String name;
 	// private int cod;
-	
+
 	protected WeatherResponse() {
 	}
 
@@ -64,6 +65,13 @@ public class WeatherResponse extends JavaScriptObject {
 	}-*/;
 
 	/**
+	 * @return The rain
+	 */
+	public final native Rain getRain() /*-{
+		return this.rain;
+	}-*/;
+
+	/**
 	 * @return The dt
 	 */
 	public final native int getDt() /*-{
@@ -97,6 +105,5 @@ public class WeatherResponse extends JavaScriptObject {
 	public final native int getCod() /*-{
 		return this.cod;
 	}-*/;
-
 
 }

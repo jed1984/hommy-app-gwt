@@ -12,6 +12,7 @@ public class ActivityConfiguration {
 
 	public static class Properties {
 		public static final String CITY = "city";
+		public static final String COUNTRY = "country";
 	}
 
 	private String name;
