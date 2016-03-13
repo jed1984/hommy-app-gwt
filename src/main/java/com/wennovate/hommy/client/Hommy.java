@@ -13,7 +13,9 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.wennovate.hommy.client.Region.Position;
+import com.wennovate.hommy.client.exceptions.ConfigurationException;
 import com.wennovate.hommy.client.mappers.RegionActivityMapper;
+import com.wennovate.hommy.client.utils.ApplicationConfiguration;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -27,12 +29,14 @@ public class Hommy implements EntryPoint {
 	 * Create a remote service proxy to talk to the server-side Greeting
 	 * service.
 	 */
-	//private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+	// private final GreetingServiceAsync greetingService =
+	// GWT.create(GreetingService.class);
 
-	//private final Messages messages = GWT.create(Messages.class);
+	// private final Messages messages = GWT.create(Messages.class);
 
 	private HashMap<Position, Widget> regions = new HashMap<>();
 	private HashMap<Position, RegionActivityMapper> regionsActivityMapper = new HashMap<>();
+	private ApplicationConfiguration applicationConfig;
 
 	/**
 	 * This is the entry point method.
@@ -41,6 +45,13 @@ public class Hommy implements EntryPoint {
 		logger.info("************ onModuleLoad ************");
 		FlowPanel container = new FlowPanel();
 		container.ensureDebugId("cwFlowPanel");
+
+		try {
+			applicationConfig = new ApplicationConfiguration();
+		} catch (ConfigurationException e) {
+			// TODO Kill Application!!!
+			logger.fatal(e);
+		}
 
 		// Add some content to the panel
 		for (Position p : Position.values()) {
@@ -64,7 +75,8 @@ public class Hommy implements EntryPoint {
 		regionPanel.getElement().setClassName(positionName);
 		regionPanel.getElement().setPropertyObject("functions", new Object());
 
-		RegionActivityMapper regionActivityMapper = injector.regionActivityMapperFactory().create(position);
+		RegionActivityMapper regionActivityMapper = injector.regionActivityMapperFactory().create(position,
+				applicationConfig);
 		ActivityManager regionActivityManager = new ActivityManager(regionActivityMapper, injector.eventBus());
 		regionActivityManager.setDisplay(regionPanel);
 		regions.put(position, regionPanel);

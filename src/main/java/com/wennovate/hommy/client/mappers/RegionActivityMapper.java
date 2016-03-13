@@ -23,27 +23,30 @@ public class RegionActivityMapper implements ActivityMapper {
 	private ActivityFactory activityFactory;
 
 	public interface RegionActivityMapperFactory {
-		RegionActivityMapper create(@Assisted("regionPosition") Position regionPosition);
+		RegionActivityMapper create(@Assisted("regionPosition") Position regionPosition,
+				@Assisted("applicationConfig") ApplicationConfiguration applicationConfig);
 	}
 
 	private String currentActivityName;
 	private InitializableActivity currentActivity;
+	private ApplicationConfiguration applicationConfig;
 
 	@Inject
 	private NullActivity nullActivity;
 
 	@Inject
-	RegionActivityMapper(ActivityFactory activityFactory, @Assisted("regionPosition") Position regionPosition) {
+	RegionActivityMapper(ActivityFactory activityFactory, @Assisted("regionPosition") Position regionPosition,
+			@Assisted("applicationConfig") ApplicationConfiguration applicationConfig) {
 		this.activityFactory = activityFactory;
 		this.regionPosition = regionPosition;
 		this.currentActivity = null;
 		this.currentActivityName = null;
+
+		this.applicationConfig = applicationConfig;
 	}
 
 	@Override
 	public Activity getActivity(Place place) {
-		ApplicationConfiguration applicationConfig = ApplicationConfiguration.get();
-
 		ActivityConfiguration activityConfig = applicationConfig.getActivityConfiguration(regionPosition);
 
 		if (activityConfig == null || activityConfig.getName() == null) {

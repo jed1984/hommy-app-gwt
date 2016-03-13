@@ -22,7 +22,7 @@ import com.wennovate.hommy.client.exceptions.ConfigurationException;
 public class ApplicationConfiguration {
 	private static final Logger logger = LogManager.getLogger(ApplicationConfiguration.class);
 
-	private static final String NAME = "application-config.xml";
+	private static final String NAME = "application-configuration";
 
 	private Map<String, String> metadata;
 
@@ -30,11 +30,10 @@ public class ApplicationConfiguration {
 
 	private Map<String, Region> regions;
 
-	private ApplicationConfiguration() throws ConfigurationException {
+	public ApplicationConfiguration() throws ConfigurationException {
 		logger.info("Application config loading...");
 
-		// String text = File.loadTextFileSync(getApplicationConfig());
-		String text = getApplicationConfig();
+		String text = File.loadTextFileSync(getApplicationConfig());
 		Document applicationDocument = XMLParser.parse(text);
 		parseConfigurations(applicationDocument);
 	}
@@ -88,19 +87,6 @@ public class ApplicationConfiguration {
 			throw new ConfigurationException("Application Configuration not found!");
 		}
 		return appConfig.getContent();
-
-//		return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" +
-//		"<application fileVersion=\"1.0\">"
-//				+ "<activities>" 
-//				+ "<activity name=\"Empty\" class-name=\"NullActivity\"/>"
-//				+ "<activity name=\"Weather\" class-name=\"WeatherActivity\" city=\"Milan\" country=\"Italy\"/>"
-//				+ "<activity name=\"Clock\" class-name=\"ClockActivity\"/>" 
-//				+"		<activity name=\"Rss\" class-name=\"RssActivity\"/>"
-//				+ "</activities>" + "<regions>"
-//				+ "<region position=\"TOP_LEFT\" activity-name=\"Clock\"/>"
-//				+ "<region position=\"TOP_RIGHT\" activity-name=\"Weather\"/>" 
-//				+ "</regions>" 
-//				+ "</application>";
 	}
 
 	// ////////////////////////////////////////////
@@ -126,20 +112,4 @@ public class ApplicationConfiguration {
 		}
 		return val;
 	}
-
-	private static ApplicationConfiguration instance = null;
-
-	public static ApplicationConfiguration get() {
-		if (instance == null) {
-			try {
-				instance = new ApplicationConfiguration();
-			} catch (ConfigurationException e) {
-				logger.error("Configuration exception", e);
-			}
-		}
-
-		// returns null if an exception occurs
-		return instance;
-	}
-
 }
