@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.inject.Inject;
+import com.wennovate.hommy.client.activities.ActivityConfiguration.Properties;
 import com.wennovate.hommy.client.rss.RssApi;
 import com.wennovate.hommy.client.rss.RssItem;
 import com.wennovate.hommy.client.ui.RssView;
@@ -21,6 +22,8 @@ public class RssActivity extends ActivityBase implements RssView.Presenter {
 	private static final Logger logger = LogManager.getLogger(RssActivity.class);
 
 	private RssView view;
+	private String feedName;
+	private int feedNum = 50;
 
 	@Inject
 	public RssActivity(RssView view) {
@@ -32,33 +35,52 @@ public class RssActivity extends ActivityBase implements RssView.Presenter {
 	 */
 	@Override
 	public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
+		// TODO add feeds to application-config file, parse them and use feed
+		// reading urls from a map
+		this.feedName = getProperty(Properties.FEED_NAME);
+
+		if (getProperty(Properties.FEED_NUM) != null) {
+			this.feedNum = Integer.parseInt(getProperty(Properties.FEED_NUM));
+		}
+
 		try {
 			List<RssItem> items = RssApi.getRssFeedItems(RssApi.GAZZETTA_FEED);
 
-			VerticalPanel itemsVPanel = new VerticalPanel();
-			itemsVPanel.setSpacing(5);
+			VerticalPanel rssVPanel = new VerticalPanel();
+			rssVPanel.getElement().setId("rss");
+			// TODO set title runtime
+			HTML header = new HTML("FEED GAZZETTA");
+			header.setStyleName("header");
+			rssVPanel.add(header);
 
-			// Add some content to the panel
+			int feedCount = 0;
+			// Add items content to the panel
 			for (RssItem rssItem : items) {
-				DockPanel panel = new DockPanel();
-				panel.add(new HTML(rssItem.getTitle()), DockPanel.NORTH);
-				panel.add(new HTML(rssItem.getDescription()), DockPanel.CENTER);
-				if (!rssItem.getImageURL().isEmpty())
-					panel.add(new Image(rssItem.getImageURL(), 0, 0, 40, 40), DockPanel.WEST);
-				itemsVPanel.add(panel);
+				DockPanel itemPanel = new DockPanel();
+				itemPanel.setStyleName("item");
+
+				HTML titlePanel = new HTML(rssItem.getTitle());
+				titlePanel.setStyleName("title");
+				itemPanel.add(titlePanel, DockPanel.NORTH);
+
+				HTML descriptionPanel = new HTML(rssItem.getDescription());
+				descriptionPanel.setStyleName("description");
+				itemPanel.add(descriptionPanel, DockPanel.CENTER);
+
+				if (!rssItem.getImageURL().isEmpty()) {
+					Image imagePanel = new Image(rssItem.getImageURL(), 0, 0, 120, 60);
+					imagePanel.setStyleName("image");
+					itemPanel.add(imagePanel, DockPanel.WEST);
+				}
+
+				rssVPanel.add(itemPanel);
+				if (++feedCount >= feedNum)
+					break;
 			}
 
-			containerWidget.setWidget(itemsVPanel);
-
-			logger.info(items);
+			containerWidget.setWidget(rssVPanel);
 		} catch (Exception e) {
 			logger.error(e);
 		}
-	}
-
-	@Override
-	public void goTo(Place place) {
-		// TODO Auto-generated method stub
-		
 	}
 }

@@ -32,17 +32,18 @@ public class RssApi {
 	}
 
 	private static List<RssItem> getItems(String xml) {
-		logger.info(xml);
+		//logger.info(xml);
 		List<RssItem> items = new ArrayList<RssItem>();
 
 		Document feedDocument = XMLParser.parse(xml);
 		Element feedElement = feedDocument.getDocumentElement();
 		NodeList itemsNodeList = feedElement.getElementsByTagName("item");
 		for (int i = 0; i < itemsNodeList.getLength(); i++) {
-			logger.info("parse element n" + i);
+			//logger.info("parse element n" + i);
 			Element item = (Element) itemsNodeList.item(i);
-			String title = getCharacterDataFromElement(item.getElementsByTagName("title").item(0));
-			String description = getCharacterDataFromElement(item.getElementsByTagName("description").item(0));
+			String title = getCharacterDataFromElement(item.getElementsByTagName("title").item(0)).trim();
+			String description = getCharacterDataFromElement(item.getElementsByTagName("description").item(0)).trim();
+			
 			String imageURL = "";
 			if (item.getElementsByTagName("enclosure") != null
 					&& item.getElementsByTagName("enclosure").item(0) != null) {
@@ -51,7 +52,8 @@ public class RssApi {
 			}
 
 			// cleanup description
-			description = description.replace(title, "");
+			description = description.replaceAll("\\<[^>]*>","");
+			description = description.replace(title.trim(), "");
 
 			RssItem rssItem = new RssItem();
 			rssItem.setTitle(title);

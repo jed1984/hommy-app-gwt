@@ -1,7 +1,10 @@
 package com.wennovate.hommy.client.ui;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.ParagraphElement;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -21,9 +24,9 @@ public class WeatherViewImpl extends Composite implements WeatherView {
 	@UiField
 	ParagraphElement currentTemperature;
 	@UiField
-	ParagraphElement highestTemperature;
+	ParagraphElement sunrise;
 	@UiField
-	ParagraphElement lowestTemperature;
+	ParagraphElement sunset;
 	@UiField
 	ParagraphElement weatherDescription;
 	@UiField
@@ -60,14 +63,18 @@ public class WeatherViewImpl extends Composite implements WeatherView {
 	@Override
 	public void updateCurrentWeather(WeatherResponse weatherResponse) {
 		city.setInnerText(weatherResponse.getName());
-		highestTemperature.setInnerText(weatherResponse.getMain().getTempMax() + "°");
-		lowestTemperature.setInnerText(weatherResponse.getMain().getTempMin() + "°");
-		currentTemperature.setInnerText(weatherResponse.getMain().getTemp() + "°");
+		sunrise.setInnerText("Alba: " + getTime(weatherResponse.getSys().getSunrise()));
+		sunset.setInnerText("Tramonto: " + getTime(weatherResponse.getSys().getSunset()));
+		currentTemperature.setInnerText(Math.round(weatherResponse.getMain().getTemp()) + "°");
 		wind.setInnerHTML(weatherResponse.getWind().getSpeed() + "kmh");
 		rain.setInnerHTML(weatherResponse.getRain().get3H() + " in 3h");
-		clouds.setInnerHTML(weatherResponse.getClouds().getAll()+ "");
+		clouds.setInnerHTML(weatherResponse.getClouds().getAll() + "%");
 		weatherDescription.setInnerText(weatherResponse.getWeather().get(0).getDescription());
 		weatherIcon.setUrl("http://openweathermap.org/img/w/" + weatherResponse.getWeather().get(0).getIcon() + ".png");
+	}
+
+	private String getTime(int timestamp) {
+		return DateTimeFormat.getFormat("hh:mm").format(new Date(timestamp));
 	}
 
 	@Override

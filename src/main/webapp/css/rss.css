@@ -1,0 +1,42 @@
+#rss {
+	padding: 40px;
+	background-color: #f3f3f3;
+}
+
+#rss .header {
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    font-size: 41px;
+    font-weight: 300;
+}
+
+#rss tbody{
+	background-color: rgb(23, 57, 85);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08) inset, 0 1px 1px #fafafa;
+	border-radius: 6px;
+    display: block;
+    padding: 1em;
+}
+
+#rss .item tbody{
+	display: table-row-group !important;
+}
+
+#rss .item .image {
+	background-size: 120px !important;
+}
+
+#rss .item .title {
+    color: #fe921f;
+    /* text-decoration: underline; */
+    font-weight: bold;
+    margin: 1em 0em;
+    font-size: small;
+}
+
+#rss .item .description {
+	color: #adb7bd;
+	font-family: 'Lucida Sans', Arial, sans-serif;
+	margin: 0px 8px;
+	font-weight: bold;
+}

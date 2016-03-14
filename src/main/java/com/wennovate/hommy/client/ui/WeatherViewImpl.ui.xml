@@ -7,12 +7,12 @@
 				<div class="left">
 					<p ui:field="city" class="city"/>
 					<p ui:field="currentTemperature" class="current-temperature" />
-					<p ui:field="highestTemperature" />
-					<p ui:field="lowestTemperature" />
+					<p ui:field="sunrise" />
+					<p ui:field="sunset" />
 				</div>
 				<div class="right">
 					<g:Image ui:field="weatherIcon" />
-					<p ui:field="weatherDescription" />
+					<p ui:field="weatherDescription" class="description" />
 					<p ui:field="rain" class="rain" />
 					<p ui:field="wind" class="wind" />
 					<p ui:field="clouds" class="clouds" />

@@ -13,6 +13,8 @@ public class ActivityConfiguration {
 	public static class Properties {
 		public static final String CITY = "city";
 		public static final String COUNTRY = "country";
+		public static final String FEED_NAME = "feed-name";
+		public static final String FEED_NUM = "feed-num";
 	}
 
 	private String name;
